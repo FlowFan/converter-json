@@ -16,10 +16,8 @@ class JsonConverterFactory private constructor(private val json: Json) : Convert
         type: Type,
         annotations: Array<out Annotation>,
         retrofit: Retrofit
-    ): Converter<ResponseBody, *> {
-        return Converter {
-            json.decodeFromString(serializer(type), it.string())
-        }
+    ) = Converter<ResponseBody, Any> {
+        json.decodeFromString(serializer(type), it.string())
     }
 
     @OptIn(ExperimentalSerializationApi::class)
@@ -28,13 +26,11 @@ class JsonConverterFactory private constructor(private val json: Json) : Convert
         parameterAnnotations: Array<out Annotation>,
         methodAnnotations: Array<out Annotation>,
         retrofit: Retrofit
-    ): Converter<*, RequestBody> {
-        return Converter<Any, RequestBody> {
-            RequestBody.create(
-                MediaType.get("application/json; charset=UTF-8"),
-                json.encodeToString(serializer(type), it)
-            )
-        }
+    ) = Converter<Any, RequestBody> {
+        RequestBody.create(
+            MediaType.get("application/json; charset=UTF-8"),
+            json.encodeToString(serializer(type), it)
+        )
     }
 
     companion object {
@@ -44,7 +40,7 @@ class JsonConverterFactory private constructor(private val json: Json) : Convert
                 coerceInputValues = true
             }
         ): JsonConverterFactory {
-            if (json == null) throw NullPointerException("json == null")
+            requireNotNull(json)
             return JsonConverterFactory(json)
         }
     }

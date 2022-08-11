@@ -15,7 +15,7 @@ maven { url 'https://jitpack.io' }
 > Module中：
 
 ```groovy
-implementation 'com.github.fan1138612367:converter-json:1.3.3'
+implementation 'com.github.fan1138612367:converter-json:1.4.0'
 ```
 
 ### 1.直接使用

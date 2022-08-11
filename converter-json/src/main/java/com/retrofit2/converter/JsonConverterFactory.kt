@@ -4,8 +4,8 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonBuilder
 import kotlinx.serialization.serializer
-import okhttp3.MediaType
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.ResponseBody
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -27,20 +27,21 @@ class JsonConverterFactory private constructor(private val json: Json) : Convert
         methodAnnotations: Array<out Annotation>,
         retrofit: Retrofit
     ) = Converter<Any, RequestBody> {
-        RequestBody.create(
-            MediaType.get("application/json; charset=UTF-8"),
-            json.encodeToString(serializer(type), it)
-        )
+        json.encodeToString(serializer(type), it).toRequestBody()
     }
 
     companion object {
-        @JvmStatic
-        @JvmOverloads
-        fun create(
-            json: Json = Json {
+        private val jsonDefault by lazy {
+            Json {
                 ignoreUnknownKeys = true
                 coerceInputValues = true
             }
+        }
+
+        @JvmStatic
+        @JvmOverloads
+        fun create(
+            json: Json = jsonDefault
         ) = JsonConverterFactory(json)
 
         fun create(configuration: JsonBuilder.() -> Unit) =

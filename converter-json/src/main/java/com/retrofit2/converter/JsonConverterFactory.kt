@@ -14,8 +14,8 @@ class JsonConverterFactory private constructor(
     private val json: Json
 ) : Converter.Factory() {
     companion object {
-        private val jsonDefault: Json by lazy {
-            Json {
+        private val defaultConfiguration: JsonBuilder.() -> Unit by lazy {
+            {
                 ignoreUnknownKeys = true
                 coerceInputValues = true
             }
@@ -24,12 +24,10 @@ class JsonConverterFactory private constructor(
         @JvmStatic
         @JvmOverloads
         fun create(
-            json: Json = jsonDefault
-        ): JsonConverterFactory = JsonConverterFactory(json)
-
-        fun create(
-            configuration: JsonBuilder.() -> Unit
-        ): JsonConverterFactory = create(Json(builderAction = configuration))
+            configuration: JsonBuilder.() -> Unit = defaultConfiguration
+        ): JsonConverterFactory = JsonConverterFactory(
+            Json(builderAction = configuration)
+        )
     }
 
     override fun responseBodyConverter(

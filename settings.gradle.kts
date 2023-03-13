@@ -12,5 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
 rootProject.name = "Converter Json"
-include ':converter-json'
+include(":converter-json")

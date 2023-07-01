@@ -8,8 +8,8 @@ plugins {
 
 android {
     namespace = "com.retrofit2.converter"
-    compileSdk = 33
-    buildToolsVersion = "33.0.0"
+    compileSdk = 34
+    buildToolsVersion = "34.0.0"
 
     defaultConfig {
         minSdk = 23
@@ -43,7 +43,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "io.github.flowfan"
             artifactId = "converter-json"
-            version = "1.5.1"
+            version = "1.6.0"
 
             afterEvaluate {
                 from(components["release"])

@@ -1,7 +1,6 @@
 plugins {
-    alias(libs.plugins.com.android.library)
-    kotlin("android")
-    kotlin("plugin.serialization")
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
     `maven-publish`
     signing
 }
@@ -12,7 +11,7 @@ android {
     buildToolsVersion = "34.0.0"
 
     defaultConfig {
-        minSdk = 23
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -43,7 +42,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "io.github.flowfan"
             artifactId = "converter-json"
-            version = "1.6.2"
+            version = "1.6.3"
 
             afterEvaluate {
                 from(components["release"])

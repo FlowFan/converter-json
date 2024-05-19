@@ -11,7 +11,7 @@
 ### 添加依赖
 
 ```groovy
-implementation 'io.github.flowfan:converter-json:1.6.3'
+implementation 'io.github.flowfan:converter-json:1.7.0'
 ```
 
 ### 1.直接使用

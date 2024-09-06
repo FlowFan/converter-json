@@ -42,7 +42,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "io.github.flowfan"
             artifactId = "converter-json"
-            version = "1.7.1"
+            version = "1.7.2"
 
             afterEvaluate {
                 from(components["release"])

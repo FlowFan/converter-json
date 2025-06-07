@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -7,11 +9,10 @@ plugins {
 
 android {
     namespace = "com.retrofit2.converter"
-    compileSdk = 35
-    buildToolsVersion = "35.0.0"
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = 24
+        minSdk = libs.versions.android.minSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -27,13 +28,16 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
     publishing {
         singleVariant("release") {
             withSourcesJar()
         }
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_1_8)
     }
 }
 
@@ -42,7 +46,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "io.github.flowfan"
             artifactId = "converter-json"
-            version = "1.8.1"
+            version = "1.9.0"
 
             afterEvaluate {
                 from(components["release"])
@@ -74,7 +78,7 @@ publishing {
     }
     repositories {
         maven {
-            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            url = uri("https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/")
             credentials {
                 username = properties["ossrhUsername"] as String
                 password = properties["ossrhPassword"] as String

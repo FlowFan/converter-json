@@ -7,11 +7,10 @@ plugins {
 
 android {
     namespace = "com.retrofit2.converter"
-    compileSdk = 35
-    buildToolsVersion = "35.0.0"
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = 24
+        minSdk = libs.versions.android.minSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -74,7 +73,7 @@ publishing {
     }
     repositories {
         maven {
-            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            url = uri("https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/")
             credentials {
                 username = properties["ossrhUsername"] as String
                 password = properties["ossrhPassword"] as String

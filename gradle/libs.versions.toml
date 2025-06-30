@@ -3,6 +3,7 @@ agp = "8.11.0"
 android-compileSdk = "36"
 android-minSdk = "21"
 kotlin = "2.2.0"
+publish = "0.33.0"
 
 okhttp = "4.12.0"
 retrofit = "3.0.0"
@@ -17,4 +18,5 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 jetbrainsKotlinPluginSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+publishPlugin = { id = "com.vanniktech.maven.publish", version.ref = "publish" }
 

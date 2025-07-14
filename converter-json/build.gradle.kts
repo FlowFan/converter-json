@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
     `maven-publish`
     signing
     alias(libs.plugins.publishPlugin)
@@ -43,7 +42,7 @@ mavenPublishing {
     coordinates(
         groupId = "io.github.flowfan",
         artifactId = "converter-json",
-        version = "1.9.0"
+        version = "1.10.0"
     )
 
     pom {

@@ -42,7 +42,7 @@ mavenPublishing {
     coordinates(
         groupId = "io.github.flowfan",
         artifactId = "converter-json",
-        version = "1.10.0"
+        version = "1.11.0"
     )
 
     pom {
